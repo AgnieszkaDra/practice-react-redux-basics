@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { useStore, useSelector } from 'react-redux'; 
 
-const Task02 = () => {
+const Task02 = ({main}) => {
 
     const getMessage = ({message = 'Magazyn nie został zaimplementowany prawidłowo!'}) => {
         return message;
     }
 
-    const message = useSelector(getMessage);
+    const message = useSelector((state) => state.main?.message ?? getMessage());
 
     return (
         <section>
@@ -18,5 +19,13 @@ const Task02 = () => {
     );
 }
 
-export default Task02;
+
+const mapStateToProps = (state) => ({
+    main: state.main
+  })
+  
+
+export default connect(
+    mapStateToProps
+  )(Task02)
 

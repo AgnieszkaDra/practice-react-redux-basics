@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { useSelector, useDispatch } from 'react-redux';
 
-const Task03 = () => {
-    const time = useSelector(({time = null}) => time);
+const Task03 = ({main}) => {
+    const time = useSelector((state) => state.main?.time ?? null);
+   
+    console.log(time)
     const dispatch = useDispatch();
 
     return (
@@ -16,5 +19,14 @@ const Task03 = () => {
     );
 }
 
-export default Task03;
+
+const mapStateToProps = (state) => ({
+    main: state.main
+  })
+  
+
+export default connect(
+    mapStateToProps
+  )(Task03)
+
 
